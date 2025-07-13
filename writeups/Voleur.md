@@ -37,7 +37,7 @@ nmap -sC -sV -p- --min-rate=5000 10.10.11.76
 <details>
 <summary>📊 Resultados Completos de Nmap (Click para expandir)</summary>
 
-```text
+<pre>
 Starting Nmap 7.95 (https://nmap.org) at 2025-07-07 06:43 -03
 Nmap scan report for dc.voleur.htb (10.10.11.76)
 Host is up (0.37s latency).
@@ -83,8 +83,8 @@ Host script results:
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/.
 Nmap done: 1 IP address (1 host up) scanned in 156.56 seconds
-
-</details> ```
+</pre>
+</details>
 🔑 Servicios Clave Identificados:
 
     Kerberos (88/tcp)
