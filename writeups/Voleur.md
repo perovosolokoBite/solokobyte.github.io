@@ -27,7 +27,7 @@ permalink: /solokobyte.github.io/writeups/Voleur/
 
 ```bash
 echo "10.10.11.76 dc.voleur.htb voleur.htb" | sudo tee -a /etc/hosts
-
+```
 
 Escaneo de Puertos con Nmap
 
