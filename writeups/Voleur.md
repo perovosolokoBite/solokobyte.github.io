@@ -81,8 +81,8 @@ Host script results:
 |_  start_date: N/A
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/.
-Nmap done: 1 IP address (1 host up) scanned in 156.56 seconds```
-</details>
+Nmap done: 1 IP address (1 host up) scanned in 156.56 seconds
+</details>```
 
 🔑 Servicios Clave Identificados:
 
