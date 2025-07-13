@@ -25,8 +25,9 @@ permalink: /solokobyte.github.io/writeups/Voleur/
 ### Configuración Inicial
 
 
-```bash
-echo "10.10.11.76 dc.voleur.htb voleur.htb" | sudo tee -a /etc/hosts
+bash
+
+```echo "10.10.11.76 dc.voleur.htb voleur.htb" | sudo tee -a /etc/hosts
 
 Escaneo de Puertos con Nmap
 
