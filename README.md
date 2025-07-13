@@ -2,4 +2,4 @@
 
 ## Máquinas Resueltas
 
-- [Voleur (Media)](/writeups/voleur.md)
+- [Voleur (Media)](/writeups/Voleur.md)

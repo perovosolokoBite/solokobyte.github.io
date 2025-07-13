@@ -2,6 +2,7 @@
 title: "Voleur"
 difficulty: "Media"
 layout: writeup
+permalink: /solokobyte.github.io/writeups/Voleur/
 ---
 # Voleur - HackTheBox Writeup
 
