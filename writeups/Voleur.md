@@ -97,9 +97,12 @@ Nmap done: 1 IP address (1 host up) scanned in 156.56 seconds
 
 Configuración de Kerberos
 
-bash
-cat /etc/krb5.conf
+```bash
 
+cat /etc/krb5.conf
+```
+
+```
 ini
 [libdefaults]
     default_realm = VOLEUR.HTB
@@ -119,6 +122,7 @@ ini
 [domain_realm]
     .voleur.htb = VOLEUR.HTB
     voleur.htb = VOLEUR.HTB
+```
     
 
 
