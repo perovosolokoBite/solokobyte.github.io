@@ -283,6 +283,23 @@ powershell
 |office2john	   | Extracción de hashes de archivos de Office   |
 |-----------------------------------------------------------------|
 
+
+version qwen
+
+
+# Herramientas y sus Funciones
+
+| Herramienta         | Función Principal                           |
+|---------------------|---------------------------------------------|
+| Nmap                | Escaneo de puertos y servicios              |
+| BloodHound-Python   | Mapeo de relaciones en Active Directory     |
+| John the Ripper     | Crackeo de contraseñas                      |
+| Impacket            | Ejecución de ataques a Kerberos             |
+| Evil-WinRM          | Conexión remota a servidores WinRM          |
+| office2john         | Extracción de hashes de archivos de Office  |
+
+
+
 🔗 Recursos Recomendados
 
     Hoja de Referencia de Ataques Kerberos
