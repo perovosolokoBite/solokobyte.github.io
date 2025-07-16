@@ -281,7 +281,6 @@ powershell
 |Impacket	   | Ejecución de ataques a Kerberos              |
 |Evil-WinRM	   | Conexión remota a servidores WinRM           |
 |office2john	   | Extracción de hashes de archivos de Office   |
-|-----------------------------------------------------------------|
 
 
 version qwen
