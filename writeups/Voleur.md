@@ -295,4 +295,4 @@ powershell
 
 
 
-<div style="text-align: center; margin-top: 40px;"> <a href="/" style="display: inline-block; padding: 12px 24px; background: #3498db; color: white; border-radius: 4px; text-decoration: none; font-weight: bold; transition: all 0.3s;"> ← Volver a la Página Principal </a> </div> ```
+<div style="text-align: center; margin-top: 40px;"> <a href="https://perovosolokobite.github.io/solokobyte.github.io/" style="display: inline-block; padding: 12px 24px; background: #3498db; color: white; border-radius: 4px; text-decoration: none; font-weight: bold; transition: all 0.3s;"> ← Volver a la Página Principal </a> </div> ```
