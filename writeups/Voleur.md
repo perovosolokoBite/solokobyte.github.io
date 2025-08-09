@@ -271,20 +271,6 @@ powershell
     Monitoreo de Seguridad:
     Es crucial monitorear los logs del Centro de Distribución de Claves (KDC) para detectar actividades sospechosas como múltiples solicitudes TGS.
 
-🛠️ Herramientas Utilizadas
-
-|-----------------------------------------------------------------|
-|Herramienta	   | Función Principal                            |
-|Nmap	           | Escaneo de puertos y servicios               |
-|BloodHound-Python | Mapeo de relaciones en Active Directory      |
-|John the Ripper   | Crackeo de contraseñas                       |
-|Impacket	   | Ejecución de ataques a Kerberos              |
-|Evil-WinRM	   | Conexión remota a servidores WinRM           |
-|office2john	   | Extracción de hashes de archivos de Office   |
-
-
-version qwen
-
 
 # Herramientas y sus Funciones
 
@@ -307,3 +293,6 @@ version qwen
 
     Técnica MITRE ATT&CK: Kerberoasting
 
+
+
+<div style="text-align: center; margin-top: 40px;"> <a href="/" style="display: inline-block; padding: 12px 24px; background: #3498db; color: white; border-radius: 4px; text-decoration: none; font-weight: bold; transition: all 0.3s;"> ← Volver a la Página Principal </a> </div> ```
